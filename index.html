@@ -10,8 +10,13 @@
     <!-- typed cdn script -->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    
+    <style>
+    #loadingMessage {
+        font-size: 18px;
+        color: #4CAF50;
+        margin-top: 10px;
+    }
+</style>
 
 </head>
 <body>
@@ -185,6 +190,11 @@
             <input type="hidden" name="_next" value=" https://gtlcloud.github.io/dev-portfolio/thanks.html">
             <button type="submit" class="submit-button">Send Message</button>
         </form>
+        
+        <!-- This is the hidden "Sending" message -->
+        <div id="loadingMessage" style="display:none;">
+            Sending your message...
+        </div>
     </section>
 
     <!-- Footer -->
@@ -217,7 +227,7 @@
         });
         </script>
         <!-- handle form resubmission -->
-         <script>
+<!--          <script>
             document.getElementById('contact').addEventListener('submit', function(event){
                 sessionStorage.setItem('submitted', true);
             });
@@ -227,7 +237,28 @@
                 window.location.replace(' https://gtlcloud.github.io/dev-portfolio/thanks.html')
                 }
             }
-         </script>
-    
+         </script> -->
+    <!-- handle form resubmission and show loading message -->
+<script>
+    // Add an event listener for form submission
+    document.getElementById('contact').addEventListener('submit', function(event) {
+        // Save the form submission state to sessionStorage
+        sessionStorage.setItem('submitted', true);
+
+        // Show the "Sending..." message
+        document.getElementById('loadingMessage').style.display = 'block';
+    });
+
+    // Handle page load to check if the form was already submitted
+    window.onload = function() {
+        if (sessionStorage.getItem('submitted') == 'true') {
+            sessionStorage.removeItem('submitted');
+
+            // Redirect to the thanks page after form submission
+            window.location.replace('https://gtlcloud.github.io/dev-portfolio/thanks.html');
+        }
+    };
+</script>
+
 </body>
 </html>
