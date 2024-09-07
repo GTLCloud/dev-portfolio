@@ -54,8 +54,13 @@
         </p>
         <p>In the meantime, feel free to explore more of my work on this site.</p>
 <!--         <a href="https://gtlcloud.github.io/dev-portfolio" class="btn">Go Back to Homepage</a> -->
-        <a href="https://gtlcloud.github.io/dev-portfolio" class="btn" onclick="window.location.href='https://gtlcloud.github.io/dev-portfolio'; return false;">Go Back to Homepage</a>
-
+<!--         <a href="https://gtlcloud.github.io/dev-portfolio" class="btn" onclick="window.location.href='https://gtlcloud.github.io/dev-portfolio'; return false;">Go Back to Homepage</a> -->
+     <button id="backToHomepage" class="btn">Go Back to Homepage</button>
+         <script>
+        document.getElementById('backToHomepage').addEventListener('click', function() {
+            window.location.href = 'https://gtlcloud.github.io/dev-portfolio';
+        });
+    </script>
     </div>
 </body>
 </html>
