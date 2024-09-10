@@ -313,8 +313,8 @@
 </script> -->
 <!-- Google Identity Services -->
 <script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script> <!-- JWT Decode Library -->
 
-<!-- Script for handling form submission and email verification -->
 <script>
     // Handle form submission and show verification modal
     document.getElementById('contactForm').addEventListener('submit', function(event) {
@@ -324,7 +324,7 @@
 
     // Handle Google Credential Response
     function handleCredentialResponse(response) {
-        const userEmail = jwt_decode(response.credential).email;
+        const userEmail = jwt_decode(response.credential).email; // Decode JWT to get user email
         const enteredEmail = document.getElementById('emailInput').value;
 
         if (userEmail === enteredEmail) {
@@ -336,6 +336,7 @@
                 // Hide modal, show loading, and submit form
                 document.getElementById('loadingMessage').style.display = 'block';
                 document.getElementById('emailVerificationModal').style.display = 'none';
+                // Submit the form
                 document.getElementById('contactForm').submit();
             }, 1500);
         } else {
@@ -356,6 +357,14 @@
                 size: 'large'
             }
         );
+
+        // Check if the form was submitted and redirect if so
+        if (sessionStorage.getItem('submitted') === 'true') {
+            sessionStorage.removeItem('submitted');
+
+            // Redirect to the thanks page after form submission
+            window.location.replace('https://gtlcloud.github.io/dev-portfolio/thanks.html');
+        }
     };
 </script>
 </body>
