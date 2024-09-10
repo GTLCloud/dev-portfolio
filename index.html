@@ -20,7 +20,24 @@
     margin-left: 5px; /* Adds space between GTL and the cloud icon */
     font-size: 0.9em; /* Adjust the size of the cloud icon if needed */
 }
-
+ .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
+    .modal-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+    }
 </style>
 
 </head>
@@ -187,7 +204,7 @@
 
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+   <!-- <section id="contact" class="contact">
         <h2>Talk to me</h2>
         <form action="https://formsubmit.co/f1bb321a7b697bd5d9833d7356e7c180" method="post">
             <input type="text" name="name" placeholder="Your Name" required>
@@ -202,7 +219,34 @@
         <div id="loadingMessage" style="display:none;">
             Sending your message...
         </div>
-    </section>
+    </section> -->
+    <!-- Contact Section -->
+<section id="contact" class="contact">
+    <h2>Talk to me</h2>
+    <form id="contactForm" action="https://formsubmit.co/f1bb321a7b697bd5d9833d7356e7c180" method="post">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" id="emailInput" name="email" placeholder="Your Email" required>
+        <textarea name="msg" placeholder="Your Message" rows="4" required></textarea>
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://gtlcloud.github.io/dev-portfolio/thanks.html">
+        <button type="submit" class="submit-button">Send Message</button>
+    </form>
+
+    <!-- Hidden "Sending" message -->
+    <div id="loadingMessage" style="display:none;">
+        Sending your message...
+    </div>
+
+    <!-- Modal for Email Verification -->
+    <div id="emailVerificationModal" class="modal">
+        <div class="modal-content">
+            <h2>Email Verification</h2>
+            <p>Please verify your email by logging in or using fingerprint authentication.</p>
+            <button id="verifyEmailButton">Verify Email</button>
+            <p id="loadingVerifyMessage" style="display: none;">Verifying email, please wait...</p>
+        </div>
+    </div>
+</section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -236,20 +280,9 @@
             });
         });
         </script>
-        <!-- handle form resubmission -->
-<!--          <script>
-            document.getElementById('contact').addEventListener('submit', function(event){
-                sessionStorage.setItem('submitted', true);
-            });
-            window.onload = function(){
-                if(sessionStorage.getItem('submitted') == 'true'){
-                sessionStorage.removeItem('submitted');
-                window.location.replace(' https://gtlcloud.github.io/dev-portfolio/thanks.html')
-                }
-            }
-         </script> -->
     <!-- handle form resubmission and show loading message -->
-<script>
+    
+<!-- <script>
     // Add an event listener for form submission
     document.getElementById('contact').addEventListener('submit', function(event) {
         // Save the form submission state to sessionStorage
@@ -268,7 +301,47 @@
             window.location.replace('https://gtlcloud.github.io/dev-portfolio/thanks.html');
         }
     };
-</script>
+</script> -->
+<script>
+    // Existing form submission handling
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form from submitting immediately
 
+        // Display the email verification modal
+        document.getElementById('emailVerificationModal').style.display = 'flex';
+    });
+
+    // Handle email verification button click
+    document.getElementById('verifyEmailButton').addEventListener('click', function() {
+        document.getElementById('loadingVerifyMessage').style.display = 'block'; // Show verification message
+
+        // Simulate email verification (e.g., using OAuth or another method)
+        setTimeout(function() {
+            document.getElementById('loadingVerifyMessage').textContent = 'Verification Complete!';
+
+            setTimeout(function() {
+                // Store the form submission state in sessionStorage
+                sessionStorage.setItem('submitted', true);
+
+                // Show the "Sending..." message and hide the modal
+                document.getElementById('loadingMessage').style.display = 'block';
+                document.getElementById('emailVerificationModal').style.display = 'none';
+
+                // Submit the form
+                document.getElementById('contactForm').submit();
+            }, 1500); // Small delay after verification
+        }, 3000); // Simulate a 3-second verification delay
+    });
+
+    // Check if the form was submitted and redirect if so
+    window.onload = function() {
+        if (sessionStorage.getItem('submitted') == 'true') {
+            sessionStorage.removeItem('submitted');
+
+            // Redirect to the thanks page after form submission
+            window.location.replace('https://gtlcloud.github.io/dev-portfolio/thanks.html');
+        }
+    };
+</script>
 </body>
 </html>
