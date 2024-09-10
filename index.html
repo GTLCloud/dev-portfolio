@@ -53,32 +53,17 @@
 #verifyEmailButton:hover {
     background-color: #45a049;
 }    
-.footer {
-    background-color: #f4f4f4;
-    padding: 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
+.footer-logo {
+    display: inline-flex;
     align-items: center;
-}
- .footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 15px;
+    font-size: 18px; /* Adjust as needed */
+    margin-right: 5px;
 }
 
-.footer-content h3 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #333;
+.footer-logo i {
+    margin-left: 5px;
 }
 
-.footer-content p {
-    margin: 0;
-    font-size: 1rem;
-    color: #333;
-}
        
 </style>
 
@@ -286,19 +271,18 @@
 <!-- Footer -->
 <footer class="footer">
     <div class="footer-content">
-        <h3>GTL <i class="fa-solid fa-cloud"></i></h3>
-        <p>&copy; 2024 | All rights reserved.</p>
-    </div>
-    <div class="social-links">
-        <a href="https://github.com/nestah" class="social-link"><i class="fa-brands fa-github"></i></a>
-        <a href="https://stackoverflow.com/users/18680582/phestus" class="social-link"><i class="fa-brands fa-stack-overflow"></i></a>
-        <a href="#" class="social-link"><i class="fa-brands fa-linkedin"></i></a>
-        <!-- WhatsApp link -->
-        <a href="https://wa.me/254790851168" id="social" class="social-link" target="_blank">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
+        <p>&copy; <span class="footer-logo">GTL <i class="fa-solid fa-cloud"></i></span> 2024 | All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://github.com/nestah" class="social-link"><i class="fa-brands fa-github"></i></a>
+            <a href="https://stackoverflow.com/users/18680582/phestus" class="social-link"><i class="fa-brands fa-stack-overflow"></i></a>
+            <a href="#" class="social-link"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://wa.me/254790851168" id="social" class="social-link" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+        </div>
     </div>
 </footer>
+
 
     <!-- scripts -->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
