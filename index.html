@@ -235,27 +235,27 @@
     </div>
 
     <!-- Modal for Email Verification -->
-    <div id="emailVerificationModal" class="modal">
-    <div class="modal-content">
-        <h2>Email Verification</h2>
-        <p>Please verify your email by logging in with your Google account.</p>
-        <div id="g_id_onload"
-            data-client_id="302958877847-ka3m3se629cfcimbaflc2iknc9q71v0t.apps.googleusercontent.com"
-            data-login_uri=""
-            data-auto_select="true"
-            data-itp_support="true">
+    <div id="emailVerificationModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Email Verification</h2>
+            <p>Please verify your email by logging in with your Google account.</p>
+            <div id="g_id_onload"
+                data-client_id="302958877847-ka3m3se629cfcimbaflc2iknc9q71v0t.apps.googleusercontent.com"
+                data-auto_select="true"
+                data-itp_support="true">
+            </div>
+            <div class="g_id_signin" 
+                data-type="standard"
+                data-shape="rectangular"
+                data-theme="outline"
+                data-text="sign_in_with"
+                data-size="large">
+            </div>
+            <p id="loadingVerifyMessage" style="display: none;">Verifying email, please wait...</p>
         </div>
-        <div class="g_id_signin" 
-            data-type="standard"
-            data-shape="rectangular"
-            data-theme="outline"
-            data-text="sign_in_with"
-            data-size="large">
-        </div>
-        <p id="loadingVerifyMessage" style="display: none;">Verifying email, please wait...</p>
     </div>
-</div>
 </section>
+
 
     <!-- Footer -->
     <footer class="footer">
@@ -311,87 +311,52 @@
         }
     };
 </script> -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+<!-- Google Identity Services -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 
+<!-- Script for handling form submission and email verification -->
 <script>
-    // Existing form submission handling
+    // Handle form submission and show verification modal
     document.getElementById('contactForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent form from submitting immediately
-
-        // Display the email verification modal
-        document.getElementById('emailVerificationModal').style.display = 'flex';
+        event.preventDefault(); // Prevent immediate form submission
+        document.getElementById('emailVerificationModal').style.display = 'flex'; // Show verification modal
     });
 
-    // Handle email verification button click
-    document.getElementById('verifyEmailButton').addEventListener('click', function() {
-        document.getElementById('loadingVerifyMessage').style.display = 'block'; // Show verification message
+    // Handle Google Credential Response
+    function handleCredentialResponse(response) {
+        const userEmail = jwt_decode(response.credential).email;
+        const enteredEmail = document.getElementById('emailInput').value;
 
-        // Simulate email verification (e.g., using OAuth or another method)
-        setTimeout(function() {
+        if (userEmail === enteredEmail) {
             document.getElementById('loadingVerifyMessage').textContent = 'Verification Complete!';
-
+            
             setTimeout(function() {
-                // Store the form submission state in sessionStorage
+                // Store form submission state
                 sessionStorage.setItem('submitted', true);
-
-                // Show the "Sending..." message and hide the modal
+                // Hide modal, show loading, and submit form
                 document.getElementById('loadingMessage').style.display = 'block';
                 document.getElementById('emailVerificationModal').style.display = 'none';
-
-                // Submit the form
                 document.getElementById('contactForm').submit();
-            }, 1500); // Small delay after verification
-        }, 3000); // Simulate a 3-second verification delay
-    });
-
-    // Check if the form was submitted and redirect if so
-    window.onload = function() {
-        if (sessionStorage.getItem('submitted') == 'true') {
-            sessionStorage.removeItem('submitted');
-
-            // Redirect to the thanks page after form submission
-            window.location.replace('https://gtlcloud.github.io/dev-portfolio/thanks.html');
+            }, 1500);
+        } else {
+            alert('The email you verified does not match the one you entered.');
         }
-    };
-</script>
-<!--  email verification    -->
-    <script>
-// Trigger Google OAuth popup when the user clicks the Verify Email button
-function handleCredentialResponse(response) {
-    const userEmail = jwt_decode(response.credential).email;
-
-    // Verify if the email matches the one the user entered
-    const enteredEmail = document.getElementById('emailInput').value;
-
-    if (userEmail === enteredEmail) {
-        document.getElementById('loadingVerifyMessage').textContent = 'Verification Complete!';
-
-        setTimeout(function() {
-            // Save the form submission state and submit the form
-            sessionStorage.setItem('submitted', true);
-            document.getElementById('loadingMessage').style.display = 'block';
-            document.getElementById('emailVerificationModal').style.display = 'none';
-            document.getElementById('contactForm').submit();
-        }, 1500);
-    } else {
-        alert('The email you verified does not match the one you entered.');
     }
-}
 
-window.onload = function () {
-    google.accounts.id.initialize({
-        client_id: '302958877847-ka3m3se629cfcimbaflc2iknc9q71v0t.apps.googleusercontent.com',
-        callback: handleCredentialResponse
-    });
+    // Initialize Google Sign-In Button
+    window.onload = function () {
+        google.accounts.id.initialize({
+            client_id: '302958877847-ka3m3se629cfcimbaflc2iknc9q71v0t.apps.googleusercontent.com',
+            callback: handleCredentialResponse
+        });
 
-    google.accounts.id.renderButton(
-        document.querySelector('.g_id_signin'), {
-            theme: 'outline',
-            size: 'large'
-        }
-    );
-};
-
+        google.accounts.id.renderButton(
+            document.querySelector('.g_id_signin'), {
+                theme: 'outline',
+                size: 'large'
+            }
+        );
+    };
 </script>
 </body>
 </html>
