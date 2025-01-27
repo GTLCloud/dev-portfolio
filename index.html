@@ -292,8 +292,8 @@
 <!-- Footer -->
 <footer class="footer">
     <div class="footer-content">
-        <p>&copy; <span class="footer-logo">GTL <i class="fa-solid fa-cloud"></i></span> <span>{new Date().getFullYear()}</span> | All rights reserved.</p>
-      GTL <i class="fa-solid fa-cloud"></i> <span>{new Date().getFullYear()}</span>
+        <p>&copy; <span class="footer-logo">GTL <i class="fa-solid fa-cloud"></i></span> <span id="current-year"></span> | All rights reserved.</p>
+      
         <div class="social-links">
             <a href="https://github.com/nestah" class="social-link"><i class="fa-brands fa-github"></i></a>
             <a href="https://stackoverflow.com/users/18680582/phestus" class="social-link"><i class="fa-brands fa-stack-overflow"></i></a>
@@ -309,6 +309,10 @@
     <!-- scripts -->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
     <script src="scripts/animation.js"></script>
+    <script>
+  // Dynamically set the current year
+  document.getElementById("current-year").textContent = new Date().getFullYear();
+</script>
     <!-- <script src="scripts/main.js"></script> -->
      <!-- sidebar toggle -->
      <script>
