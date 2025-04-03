@@ -23,21 +23,21 @@ body {
 }
 
 /* Navbar */
-.header {
+/* .header {
     background-color: var(--primary-color);
     color: white;
-    padding: 0 24px; /* Set top/bottom padding to 0 */
+    padding: 0 24px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* height: auto; */
+   
     overflow: hidden;
-    margin: 0; /* Reset any default margin */
+    margin: 0; 
 }
 .logo-container {
     display: flex;
-    /* align-items: center; */
+    
     height: 100%;
     margin-top: 10px;
 }
@@ -45,8 +45,8 @@ body {
 .nav-links {
     display: flex;
     gap: 16px;
-    margin: 0; /* Reset any default margin */
-    padding: 0; /* Reset any default padding */
+    margin: 0; 
+    padding: 0; 
 }
 
 .nav-links a {
@@ -54,12 +54,61 @@ body {
     font-size: 18px;
     text-decoration: none;
     transition: color 0.3s;
-    margin: 0; /* Reset any default margin */
-    padding: 0; /* Reset any default padding */
+    margin: 0; 
+    padding: 0; 
 }
 
 .nav-links a:hover {
     color: var(--accent-color-1);
+} */
+/* Navbar container */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--primary-color); 
+    height: 60px; 
+}
+
+/* Logo styling */
+.logo-container h3 {
+    margin: 0;
+    font-size: 24px;
+    color: white;
+}
+
+/* Sidebar toggle button */
+.sidebar-toggle {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Navbar links container */
+.nav-links {
+    display: flex;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar link styling */
+.nav-links a {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px 15px; /* Add padding for a more clickable area */
+    border-radius: 5px; /* Optional: Round the corners for a smooth look */
+    transition: color 0.3s, background-color 0.3s; /* Add smooth transition */
+}
+
+/* Hover effect for navbar links */
+.nav-links a:hover {
+    color: var(--accent-color-1); /* Retain accent color on hover */
+    background-color: rgba(255, 255, 255, 0.2); /* Subtle background color on hover */
 }
 /* start */
 /* Sidebar Styles */
